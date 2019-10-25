@@ -808,10 +808,13 @@ def project_stats(project_id, spider_id):
             if len(old_items_count) == 0 : max_items_count = last_items_count
             else : max_items_count = max(old_items_count)
             average_items_count = sum(items_not_null) / len(items_not_null)
-            if (min_items_count / max_items_count) > 0.8 :
-                min_items_count = max_items_count * 0.8
-            if (average_items_count / max_items_count) > 0.95 or max_items_count == last_items_count:
-                max_items_count = average_items_count * 1.05
+            if max_items_count == 0:
+                min_items_count = 0
+            else:
+                if (min_items_count / max_items_count) > 0.8 :
+                    min_items_count = max_items_count * 0.8
+                if (average_items_count / max_items_count) > 0.95 or max_items_count == last_items_count:
+                    max_items_count = average_items_count * 1.05
         
         return render_template("spider_stats.html", spider=spider, start_time=start_time, end_time=end_time, end_time_short=end_time_short, duration_time=duration_time,
                     last_start_time=last_start_time, last_items_count=last_items_count, average_items_count=average_items_count,
