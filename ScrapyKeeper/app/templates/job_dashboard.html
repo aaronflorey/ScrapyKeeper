@@ -158,6 +158,7 @@
                 <th style="width: 10px">Warnings</th>
                 <th style="width: 10px">Errors</th>
                 <th style="width: 10px">Log</th>
+                <th style="width: 10px">Export</th>
                 <th style="width: 10px">Status/Action</th>
             </tr>
             {% for job in job_status.COMPLETED %}
@@ -194,6 +195,9 @@
                 <td>{{ job.errors_count }}</td>
                 <td><a href="/project/{{ project.id }}/jobexecs/{{ job.job_execution_id }}/log" target="_blank"
                        data-toggle="tooltip" data-placement="top" title="{{ job.service_job_execution_id }}">Log</a>
+                </td>
+                <td>
+                    <a href="{{ job.running_on }}/items/{{ project.project_name }}/{{ job.job_instance.spider_name }}/{{ job.service_job_execution_id }}.jl" target="_blank">Export</a>
                 </td>
                 <td>
                     {% if job.running_status == 2 %}
